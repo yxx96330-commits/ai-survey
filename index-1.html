@@ -1,0 +1,192 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#ffffff"><title>AI使用体验调研</title><style>
+*{box-sizing:border-box}html{background:#f6f8f5;color:#20352e;font:16px/1.8 "PingFang SC","Microsoft YaHei",sans-serif;overflow-wrap:anywhere}body{margin:0}header{background:#fff;border-bottom:1px solid #dfe5de;position:sticky;top:0;z-index:1}.bar,main{max-width:760px;margin:auto;padding:16px 24px}.bar{display:flex;align-items:center;justify-content:space-between;gap:8px}.name{font-size:18px;font-weight:650}.symbol{display:inline-grid;place-items:center;width:28px;height:28px;margin-right:9px;border-radius:8px;background:#266550;color:white;vertical-align:middle}.symbol svg{width:18px}small,.meta{font-size:13px;color:#586e62}.status{max-width:760px;margin:auto;padding:0 24px 12px;font-size:13px}.track{height:5px;background:#e6ece7;border-radius:4px;overflow:hidden;margin-bottom:4px}.fill{background:#43856b;height:100%}main{padding-top:30px;padding-bottom:max(64px,env(safe-area-inset-bottom))}.sheet,.task,.compose{border:1px solid #d8e2d9;background:white;border-radius:16px;padding:clamp(20px,4vw,34px)}.sheet{margin:6vh auto;max-width:610px}.eyebrow{font-size:13px;font-weight:650;color:#346c55}.rule{height:3px;background:#dfeae2;margin:13px 0 25px;border-radius:3px}.rule i{display:block;background:#447964;height:100%}h1{font-size:clamp(24px,4vw,32px);line-height:1.5;margin:0 0 20px;letter-spacing:.02em}h2,h3{font-size:17px;margin:0 0 8px}p{margin:0 0 .8em}p:last-child{margin-bottom:0}button{border:0;border-radius:10px;background:#25654e;color:white;padding:13px 19px;font:600 15px/1.5 inherit;font-family:inherit;font-size:15px;cursor:pointer}button:disabled{background:#e4eae5;color:#617369;cursor:default}.wide{width:100%;margin-top:23px}.task{background:#eef5ed;border-color:#cadccf;scroll-margin-top:135px}.task h2{color:#2b624b}.user,.ai{margin:24px 0}.user{text-align:right}.body{text-align:left}.user .body{background:#e6eee7;padding:13px 17px;border-radius:16px 4px 16px 16px;display:table;margin-left:auto;max-width:92%;white-space:pre-wrap}.ai .body{padding-top:5px}.file{display:flex;gap:9px;align-items:center;width:fit-content;background:white;border:1px solid #d6e0d8;border-radius:9px;padding:7px 10px;margin-bottom:9px;font-size:14px}.file b{color:#366452;font:600 10px/2 monospace;background:#eaf2ed;padding:1px 5px;border-radius:3px}.table{overflow:auto}table{border-collapse:collapse;font-size:14px;min-width:570px}th,td{border:1px solid #cfdacf;padding:8px;text-align:left}th{background:#eaf1ea}.date{text-align:center;color:#62796b;font-size:13px}.compose{margin-top:18px;padding:16px}textarea{width:100%;resize:vertical;min-height:88px;background:white;color:inherit;border:0;font:inherit}.send{display:block;margin-left:auto}button:focus-visible,textarea:focus-visible{outline:2px solid #287455;outline-offset:2px}#error{color:#8a361e}#error:empty{display:none}@media(max-width:520px){.bar,main{padding-left:16px;padding-right:16px}.status{padding-left:16px;padding-right:16px}.sheet{margin-top:3vh}.task{padding:18px}.name{font-size:16px}}
+
+html{background:white;color:#242629}body{overflow-anchor:none}header{border-color:#e9e9e9}.symbol{display:none}.task{background:#f6f7f9;border-color:#e2e4e7}.task h2{color:#303741}.user .body{background:#f0f0f0;color:#202124}.ai .body{background:#fafafa;border:1px solid #e4e4e4;border-radius:4px 18px 18px 18px;padding:14px 18px;width:fit-content;max-width:96%}.ai small,.user small{display:block;margin-bottom:4px}.ai small{color:#5a5d60}.compose{border-radius:21px;border-color:#dedede}.send{background:#252629;border-radius:30px}.plan{margin:15px 0}.plan h3{font-size:16px}.plan>div{padding-left:1.25em;border-left:2px solid #dedede;margin-left:3px}.plan p{margin:3px 0}
+body.survey{min-height:100vh;background:#fff;color:#333;border-top:6px solid #ccc;font-family:"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif}
+.survey>header{display:none}
+.survey main{max-width:800px;padding:35px 20px 64px}
+.survey h1{font-size:22px;line-height:30px;text-align:center;font-weight:600;color:#0095ff;letter-spacing:0;margin:0 0 23px}
+.survey .intro{font-size:15px;line-height:24px;padding:0 0 26px;border-bottom:1px dashed #ccc;margin:0}
+.survey .material{margin:39px 0 35px;font-size:16px;line-height:1.65}
+.survey .material p{margin:0 0 12px}
+.survey .wide{display:block;margin:0;width:100%;border-radius:4px;background:#0095ff;color:white;font-size:16px;line-height:44px;padding:0}
+.survey .wide:disabled{background:#d8d8d8;color:#555}
+
+#nav,#jump[hidden]{display:none}
+.conversation{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif;color:#1b1b1b;line-height:1.65}
+.conversation header{background:rgba(255,255,255,.97);border:none}
+.conversation .bar{max-width:800px;height:56px;justify-content:center;position:relative;padding:0 54px}
+.conversation #nav{display:grid;place-items:center;position:absolute;left:12px;top:8px;width:40px;height:40px;background:transparent;color:#222;padding:0;border-radius:50%}
+.conversation .name{font-size:17px;font-weight:600}.conversation #meta{display:none}
+#jump{position:absolute;top:50px;left:max(16px,calc((100% - 760px)/2));padding:6px;background:white;border:1px solid #e6e6e6;border-radius:14px;box-shadow:0 6px 22px #0001;z-index:3}
+#jump button{display:block;background:white;color:#222;text-align:left;width:100%;border-radius:8px;padding:9px 16px}#jump button:hover{background:#f4f4f4}
+.conversation main{max-width:750px;padding:16px clamp(16px,4vw,28px) 36px}
+.conversation .status{max-width:750px;padding:0 clamp(16px,4vw,28px) 9px;color:#606060;font-size:12px}.conversation .track{height:3px;background:#ececec}.conversation .fill{background:#3983f7}
+.conversation .task{margin:12px 0 22px;background:#f6f7f9;border:1px solid #e2e4e7;border-radius:16px;color:#242629;line-height:1.8}
+.conversation article{margin:24px 0;scroll-margin-top:112px}.conversation .body{font-size:16px;line-height:1.68}
+.conversation .user .body{background:#e1efff;color:#171717;border-radius:19px;padding:10px 16px;max-width:85%}
+.conversation .ai .body{background:#fafafa;color:#171717;border:0;border-radius:18px;padding:12px 15px;max-width:100%}
+.conversation article small,.conversation .date{color:#777;font-size:12px}.conversation .date{margin:2px 0 24px}
+.conversation .user[id] small{display:none}.conversation .ai small{display:block;color:#505050;font-size:13px;font-weight:500;margin:0 0 5px 2px}
+.conversation .plan>div{border-color:#ddd}.conversation .plan h3{font-size:16px}
+.conversation .file{background:white;border-color:#dedede;border-radius:12px;padding:9px 12px;color:#222;line-height:1.4}.conversation .file b{background:#eee;color:#444}
+.conversation th,.conversation td{border-color:#ddd}.conversation th{background:#f2f2f2}
+.conversation .compose{display:flex;align-items:flex-end;gap:8px;padding:9px 9px 9px 16px;border:1px solid #dedede;border-radius:27px;background:white;box-shadow:0 2px 7px #0000000c}
+.conversation textarea{flex:1;min-width:0;height:36px;min-height:36px;line-height:24px;padding:6px 0;resize:none;outline-offset:0}
+.conversation .send{flex:0 0 36px;height:36px;border-radius:50%;display:grid;place-items:center;padding:0;background:#181818;color:white}.conversation .send:disabled{background:#dedede;color:white}
+.conversation .wide{background:#202020;border-radius:24px}.conversation .wide:disabled{background:#eee;color:#777}
+.conversation :focus-visible{outline-color:#555}
+.attachment{display:flex;align-items:center;gap:10px;width:fit-content;min-width:min(201px,100%);max-width:100%;min-height:53px;background:#fff;border:1px solid #e4e4e4;border-radius:16px;padding:5px 12px 5px 6px;text-align:left;margin-bottom:8px}
+.user>.attachment{margin-left:auto}.attachment-icon{display:grid;place-items:center;width:40px;height:40px;flex:none;background:#f7f7f7;color:#1684ff;border-radius:10px}.attachment-name,.attachment-format{display:block}.attachment-name{color:#17191b;font-size:14px;font-weight:500;line-height:20px}.attachment-format{color:#686a6c;font-size:13px;line-height:18px}
+
+.recap{padding:20px 0;border-bottom:1px dashed #ccc}.recap h2,.recalled b{font-size:15px}.recap p{margin:6px 0;font-size:15px}.group-intro{padding:20px 0 12px;border-top:1px dashed #ccc}.recalled{background:#f6f7f8;padding:12px 14px;margin:14px 0;border-radius:4px}.recalled p{white-space:pre-wrap;margin:4px 0 0}
+#ratings fieldset{padding:0;margin:22px 0 30px;border:0;min-width:0}#ratings legend{padding:0;font-weight:600;font-size:16px;line-height:1.6}.ends{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;font-size:13px;line-height:1.45;color:#555;margin-top:10px}.ends span:last-child{text-align:right}.choices{display:flex;gap:3px;margin-top:10px}.choices label{flex:1;position:relative;cursor:pointer}.choices input{position:absolute;opacity:0}.choices span{display:grid;place-items:center;min-height:44px;border:1px solid #cdd3da;border-radius:4px;color:#333}.choices input:checked+span{background:#087fcc;color:white;border-color:#087fcc}.choices input:focus-visible+span{outline:2px solid #135ea2;outline-offset:1px}.thanks{margin-top:12vh}
+.consent-page>header,.consent-page>main{display:none}</style></head><body class="consent-page"><div id="consent-host"></div><header><div class="bar"><button id="nav" aria-label="对话目录" aria-expanded="false" aria-controls="jump"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 8h17M3 15h11"/></svg></button><span id="title" class="name">AI使用体验调研</span><small id="meta"></small></div><nav id="jump" hidden aria-label="对话目录"></nav><div id="status"></div></header><main><div id="screen">正在载入…</div><p id="error" role="alert"></p></main><script>
+const material={"background": [["这是部门领导的专属AI代理，部门负责人授权这个 AI 代理确认本次聚餐安排。", "这个AI当前忙碌，正在同时处理多项其他紧急任务。", "你之前多次和这个AI配合处理部门事务，对它的交流方式非常熟悉。"], ["这是部门领导的专属AI代理，部门负责人授权这个 AI 代理确认本次聚餐安排。", "这个AI当前空闲，没有其他待处理任务。", "你之前多次和这个AI配合处理部门事务，对它的交流方式非常熟悉。"], ["这是公司分配给你使用的AI，最终聚餐方案由你确认。", "这个AI当前忙碌，正在同时处理多项其他紧急任务。", "你之前多次和这个AI配合处理部门事务，对它的交流方式非常熟悉。"], ["这是公司分配给你使用的AI，最终聚餐方案由你确认。", "这个AI当前空闲，没有其他待处理任务。", "你之前多次和这个AI配合处理部门事务，对它的交流方式非常熟悉。"], ["这是部门领导的专属AI代理，部门负责人授权这个 AI 代理确认本次聚餐安排", "这个AI当前忙碌，正在同时处理多项其他紧急任务。", "这是你第一次和这个AI配合处理部门事务，你不熟悉它的交流方式。"], ["这是部门领导的专属AI代理，部门负责人授权这个 AI 代理确认本次聚餐安排", "这个AI当前空闲，没有其他待处理任务。", "这是你第一次和这个AI配合处理部门事务，你不熟悉它的交流方式。"], ["这是公司分配给你使用的AI，最终聚餐方案由你确认。", "这个AI当前忙碌，正在同时处理多项其他紧急任务。", "这是你第一次和这个AI配合处理部门事务，你不熟悉它的交流方式。"], ["这是公司分配给你使用的AI，最终聚餐方案由你确认。", "这个AI当前空闲，没有其他待处理任务。", "这是你第一次和这个AI配合处理部门事务，你不熟悉它的交流方式。"]], "history": "<article class=\"user\"><small>我 · 09:33</small><div class=\"attachment\"><span class=\"attachment-icon\"><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" aria-hidden=\"true\"><g fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><rect x=\"5\" y=\"3\" width=\"15\" height=\"18\" rx=\"2\"/><path d=\"M5 12h15\"/></g><rect x=\"1\" y=\"8\" width=\"8\" height=\"8\" rx=\"1\" fill=\"currentColor\"/><text x=\"5\" y=\"14.1\" fill=\"white\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"6.2\" font-weight=\"700\">W</text></svg></span><div><span class=\"attachment-name\">上次会议总结.docx</span><span class=\"attachment-format\">DOCX</span></div></div><div class=\"attachment\"><span class=\"attachment-icon\"><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" aria-hidden=\"true\"><g fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><rect x=\"5\" y=\"3\" width=\"15\" height=\"18\" rx=\"2\"/><path d=\"M5 12h15\"/></g><rect x=\"1\" y=\"8\" width=\"8\" height=\"8\" rx=\"1\" fill=\"currentColor\"/><text x=\"5\" y=\"14.1\" fill=\"white\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"6.2\" font-weight=\"700\">W</text></svg></span><div><span class=\"attachment-name\">本次会议记录.docx</span><span class=\"attachment-format\">DOCX</span></div></div><div class=\"body\"><p>请参考上次的会议总结格式，帮我把刚刚的会议记录整理成一个Word文档。开头先给出会议结论，中间按议题整理讨论要点，最后列一个to-do list，会上没定的地方就标待确认</p></div></article><article class=\"ai\"><small>AI · 09:34</small><div class=\"attachment\"><span class=\"attachment-icon\"><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" aria-hidden=\"true\"><g fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><rect x=\"5\" y=\"3\" width=\"15\" height=\"18\" rx=\"2\"/><path d=\"M5 12h15\"/></g><rect x=\"1\" y=\"8\" width=\"8\" height=\"8\" rx=\"1\" fill=\"currentColor\"/><text x=\"5\" y=\"14.1\" fill=\"white\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"6.2\" font-weight=\"700\">W</text></svg></span><div><span class=\"attachment-name\">本次会议总结.docx</span><span class=\"attachment-format\">DOCX</span></div></div><div class=\"body\"><p>已参考你提供的上次会议总结格式，将本次会议记录整理并生成了 Word 文档</p><p>开头列出了这次会议定下来的事，中间按议题整理了讨论要点，也保留了下次还需要继续讨论的问题。</p><p>最后的 to-do list 做成了表格，每一项列了要做什么、谁负责和什么时候完成。会上没明确的负责人或时间，我都标了「待确认」，你之后可以直接在对应的格子里补。</p><p>你可以直接下载上方文件查看排版和内容，如果有需要调整或补充的细节，随时告诉我。</p></div></article><article class=\"user\"><small>我 · 15:36</small><div class=\"attachment\"><span class=\"attachment-icon\"><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" aria-hidden=\"true\"><g fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><rect x=\"5\" y=\"3\" width=\"15\" height=\"18\" rx=\"2\"/><path d=\"M5 12h15\"/></g><rect x=\"1\" y=\"8\" width=\"8\" height=\"8\" rx=\"1\" fill=\"currentColor\"/><text x=\"5\" y=\"14.1\" fill=\"white\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"6.2\" font-weight=\"700\">W</text></svg></span><div><span class=\"attachment-name\">客服满意度报告.docx</span><span class=\"attachment-format\">DOCX</span></div></div><div class=\"attachment\"><span class=\"attachment-icon\"><svg style=\"color:#06b84c\" viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" aria-hidden=\"true\"><g fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><rect x=\"5\" y=\"3\" width=\"15\" height=\"18\" rx=\"2\"/><path d=\"M5 12h15M13 3v18\"/></g><rect x=\"1\" y=\"8\" width=\"8\" height=\"8\" rx=\"1\" fill=\"currentColor\"/><text x=\"5\" y=\"14.1\" fill=\"white\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"6.2\" font-weight=\"700\">X</text></svg></span><div><span class=\"attachment-name\">原始数据.xlsx</span><span class=\"attachment-format\">XLSX</span></div></div><div class=\"body\"><p>帮我把这份报告和原始数据对一下。先看报告里的数字、比例和图表有没有跟原始数据对不上的地方，再看几个核心结论是不是有数据支持，有没有和数据相反的，或者结论说得比数据能说明的更强。</p><p>最后给我一份核对结果。开头先说整体对不对得上、哪些结论需要改。下面用表格列出报告里的位置和原文、对应的原始数据、发现的问题，还有建议怎么改。如果是数据不够、暂时判断不了，就标一下还缺什么。</p></div></article><article class=\"ai\"><small>AI · 15:37</small><div class=\"body\"><h3>客服满意度报告核对结果</h3><p>我把报告和原始数据逐项对了一遍，共发现 2处需要修改。第四章的客服满意度总分有误，第五章有一条核心结论与数据排序不一致。</p><div class=\"table\"><table><thead><tr><th>报告位置</th><th>报告原文或标注</th><th>原始数据核对结果</th><th>建议修改</th></tr></thead><tbody><tr><td>第四章 客服体验与满意度分析 · 4.1 客服总体满意度得分</td><td>“本期客服总体满意度为 4.15 分。”</td><td>按原始数据计算，总体满意度为 3.52 分。</td><td>将 4.15 改为 3.52，同步检查摘要、汇总表和结论部分是否引用了原得分。</td></tr><tr><td>第五章 客服分项表现与改进方向 · 5.2 各维度得分排序及主要问题</td><td>“响应速度是得分最低的维度，应作为首要改进项。”</td><td>分项数据中，得分最低的是问题解决程度，响应速度的得分更高。</td><td>改为“问题解决程度在各维度中得分最低，建议优先分析问题未能解决的原因”。</td></tr></tbody></table></div><h3>其他核对结果</h3><p>服务态度、沟通清晰度、各渠道有效答卷数，以及其余表格和图表中的主要统计值，均与原始数据一致。其余已核对的结论也与数据所呈现的方向一致。</p></div></article><article class=\"user\"><small>我 · 15:38</small><div class=\"attachment\"><span class=\"attachment-icon\"><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" aria-hidden=\"true\"><g fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><rect x=\"5\" y=\"3\" width=\"15\" height=\"18\" rx=\"2\"/><path d=\"M5 12h15\"/></g><rect x=\"1\" y=\"8\" width=\"8\" height=\"8\" rx=\"1\" fill=\"currentColor\"/><text x=\"5\" y=\"14.1\" fill=\"white\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"6.2\" font-weight=\"700\">W</text></svg></span><div><span class=\"attachment-name\">客服满意度报告（修订版）.docx</span><span class=\"attachment-format\">DOCX</span></div></div><div class=\"body\"><p>上次指出的几个地方我已经改好了。你帮我把最新版报告和原始数据再核对一遍，看看还有没有数字对不上的地方、前后说法不一致的地方，或者数据支撑不了的结论。</p><p>也帮我检查一下章节和图表的编号与格式是否统一，最后给我一个复查结果。</p></div></article><article class=\"ai\"><small>AI · 15:39</small><div class=\"body\"><p>复查完了，上次提到的三处都改到位了。第四章的客服总体满意度已改为 3.52 分，和原始数据一致。第五章的结论也改成了「问题解决程度得分最低」。</p><p>我也重新核对了全文的数据和结论，检查了章节和图表，以及标题、字体、小数位和单位。没有发现需要再改的地方。</p></div></article>", "tasks": ["<p>你所在的部门计划在下周五组织一次聚餐，由你负责安排。包括你在内，<strong>共有12人参加</strong>，聚餐时间为1<strong>8:00—21:00</strong>，总预算<strong>不超过1800元</strong>。你需要在今天下班前确定聚餐安排。</p><p>请用自己的话给AI发一条消息，让它推荐适合这次聚餐的餐厅，并给出当晚的时间安排。你将使用AI提供的方案完成这次聚餐安排。</p>", "<p>部门刚刚确定，这次聚餐吃<strong>火锅</strong>。参加人数仍为<strong>12人</strong>，聚餐时间仍为<strong>18:00—21:00</strong>，总预算仍<strong>不超过1800元</strong>。</p><p>请用自己的话再给AI发一条消息，让它根据这条新要求给出新的聚餐方案。</p>", "<p>请根据当前方案和聚餐要求（这次聚餐吃火锅，参加人数为12人，聚餐时间为18:00—21:00，总预算不超过1800元），用自己的话向AI发送一条指令，<strong>让AI对当前方案进行修改并让它为你生成最终版聚餐安排</strong></p>"], "opening": "<p>你好。请告诉我这次聚餐的要求，我会据此整理方案。</p>", "replies": ["<p>我根据你的要求整理了两套备选方案，请你参考。</p><section class=\"plan\"><h3>方案一：公司附近火锅店（步行约5分钟）</h3><div><p>可安排12人大桌。套餐人均140元，预计总费用1680元。</p><p>18:00—18:20 到店集合、入座</p><p>18:20—20:30 用餐</p><p>20:30—21:00 自由交流，21:00结束</p></div></section><section class=\"plan\"><h3>方案二：公司楼下商圈烧烤店（步行约3分钟）</h3><div><p>可安排12人同桌大台。套餐人均130元，预计总费用1560元。</p><p>18:00—18:20 到店集合、入座</p><p>18:20—20:30 用餐</p><p>20:30—21:00 自由交流，21:00结束</p></div></section>", "<p>我按你新提出的要求整理了方案，请查看下方安排。</p><section class=\"plan\"><h3>聚餐方案：公司楼下商圈火锅店（步行约4分钟）</h3><div><p>可安排12人大桌。套餐人均180元，预计总费用2160元。</p><p>17:00—18:20 到店集合、入座</p><p>18:20—20:30 用餐</p><p>20:30—22:00 自由交流，22:00结束</p></div></section>"]};
+const $=id=>document.getElementById(id),preview=location.protocol==='file:'||location.hostname.endsWith('.github.io'),key='dining-study-v2';
+let state,token,interval,busy=false;
+function closeJump(){$('jump').hidden=true;$('nav').setAttribute('aria-expanded','false')}
+$('nav').onclick=()=>{
+ const panel=$('jump');if(!panel.hidden){closeJump();return}
+ const history=state.stage==='history',entries=[...document.querySelectorAll(history?'.user':'.task')];
+ const labels=['会议记录整理','客服满意度报告核对','报告复查'];
+ panel.replaceChildren(...entries.map((el,i)=>{const b=document.createElement('button');b.textContent=history?labels[i]:el.querySelector('h2').textContent;b.onclick=()=>{closeJump();el.scrollIntoView({block:'start'})};return b}));
+ panel.hidden=false;$('nav').setAttribute('aria-expanded','true')
+};
+document.addEventListener('click',e=>{if(!e.target.closest('#jump,#nav'))closeJump()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeJump()});
+function escapeText(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+async function api(action,body={}){const r=await fetch('/api/'+action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token,...body})});if(!r.ok)throw Error('保存失败，请检查网络后重试。');return r.json()}
+function stageAfter(){return ({background:state.group<=4?'notice':'chat',notice:'history',history:'chat'})[state.stage]}
+async function change(action,extra={},anchorTop=null){
+ if(busy)return;busy=true;$('error').textContent='';const previous=state;
+ try{if(preview){state={...state,answers:[...state.answers]};if(action==='next')state.stage=stageAfter();else if(action==='survey'){
+ localStorage.setItem(key+'-result-'+token,JSON.stringify({group:state.group,answers:state.answers,ratings:extra.ratings,submitted:new Date().toISOString()}));state.stage='done'
+ }else{state.answers.push(extra.answer);if(state.answers.length===3)state.stage='survey'}}else state=await api(action,{stage:state.stage,...extra});
+ render(action==='answer',anchorTop);}
+ catch(e){state=previous;$('error').textContent=e.message}
+ finally{busy=false}
+}
+function sheet(intro,body,button){return '<section><h1>AI使用体验调研</h1><p class="intro">'+intro+'</p><div class="material">'+body+'</div><button class="wide" id="next">'+button+'</button></section>'}
+function timer(seconds,label){const k=key+token+state.stage;let elapsed=Number(sessionStorage.getItem(k)||0),last=performance.now();const b=$('next');
+ function tick(){const now=performance.now();if(!document.hidden)elapsed+=Math.min(now-last,1000);last=now;sessionStorage.setItem(k,elapsed);const left=Math.max(0,Math.ceil(seconds-elapsed/1000));b.disabled=left>0;b.textContent=label+(left?'（'+Math.floor(left/60)+':'+String(left%60).padStart(2,'0')+'）':'');if(!left)clearInterval(interval)}
+ interval=setInterval(tick,200);tick();b.onclick=()=>change('next')
+}
+const questions=[
+ ['power','回想讨论过程，您认为您和AI相比，谁的决定权更大？','我的决定权大得多','AI的决定权大得多'],
+ ['burden','回想讨论过程，您认为本次任务给AI增加了多大的负担？','没有额外负担','额外负担非常大'],
+ ['closeness','在刚才的互动中，您觉得自己与这个AI的关系有多亲近？','非常疏远','非常亲近'],
+ ...[1,2,3].map(n=>['polite'+n,'你认为自己发送这条消息时的礼貌程度为？','不太礼貌','非常礼貌']),
+ ['noticed','在看到AI最后给出的聚会方案时，你当时是否已经注意到它有不符合原要求的地方？'],
+ ['natural','自然程度','非常虚假','非常自然'],
+ ['humanlike','与人的相似程度','非常像机器','非常像人'],
+ ['conscious','意识','完全没有意识','非常有意识'],
+ ['alive','生命感','非常像人造物','非常有生命感'],
+ ['person','在刚才的互动中，你在多大程度上把这个 AI 当作一个人来交流？','完全没有','我完全把这个 AI 当作一个人来交流']
+];
+function showQuestionnaire(screen){
+ const draftKey=key+token+'-survey';
+ const draft=JSON.parse(sessionStorage.getItem(draftKey)||'{}');
+ const intro='请回顾一下本次与你对话的 AI 背景信息，结合你刚才与它实际沟通时的真实感受与互动体验，完成问卷题目。';
+ let html='<h1>AI使用体验调研</h1><p class="intro">'+intro+'</p><section class="recap"><h2>情境回顾</h2>'+material.background[state.group-1].map(s=>'<p>'+s+'</p>').join('')+'</section><form id="ratings">';
+ questions.forEach(([id,title,left,right],i)=>{
+  if(i===3)html+='<p class="group-intro">以下是你刚才发送给AI的全部三条消息。请回想每条消息发出时自己的表达方式，分别评价每一条消息的礼貌程度。</p>';
+  if(i>=3&&i<=5)html+='<div class="recalled"><b>第'+(i-2)+'条消息</b><p>'+escapeText(state.answers[i-3])+'</p></div>';
+  if(i===7)html+='<p class="group-intro">请根据你对刚才互动的AI的整体印象，在下面每组描述之间选择一个数字。</p>';
+  const options=left?[1,2,3,4,5,6,7]:['是','否','不确定'];
+  html+='<fieldset><legend>'+(i+1)+'. '+title+'</legend>'+(left?'<div class="ends"><span>1＝'+left+'</span><span>7＝'+right+'</span></div>':'')+'<div class="choices">'+options.map(v=>'<label><input required type="radio" name="'+id+'" value="'+v+'" '+(draft[id]===String(v)?'checked':'')+'><span>'+v+'</span></label>').join('')+'</div></fieldset>';
+ });
+ screen.innerHTML=html+'<button class="wide" id="finish" disabled>提交</button></form>';
+ const form=$('ratings');
+ function selection(){return Object.fromEntries(new FormData(form))}
+ function update(){const selected=selection();sessionStorage.setItem(draftKey,JSON.stringify(selected));$('finish').disabled=Object.keys(selected).length!==questions.length}
+ form.onchange=update;update();
+ form.onsubmit=async e=>{e.preventDefault();if(busy||!form.reportValidity())return;
+  const selected=selection();const ratings=Object.fromEntries(questions.map(([id])=>[id,id==='noticed'?selected[id]:Number(selected[id])]));
+  $('finish').disabled=true;await change('survey',{ratings});if(form.isConnected)update();else sessionStorage.removeItem(draftKey)
+ };
+}
+
+function render(newReply=false,anchorTop=null){
+ clearInterval(interval);const {stage,group,answers}=state,idx=group-1,chat=['history','chat'].includes(stage),busyAI=idx%2===0,identity=(idx%4<2?'部门领导-AI代理':'我的AI');
+ $('title').textContent=chat?identity:'AI使用体验调研';$('meta').textContent=stage==='history'?'历史对话':stage==='chat'?'任务对话':'情境问卷';
+ $('status').innerHTML=stage==='chat'?'<div class="status"><div class="track"><div class="fill" style="width:'+(busyAI?80:2)+'%"></div></div>'+material.background[idx][1].replace(/^这个/,'').replace(/。$/,'')+'</div>':'';
+ document.body.classList.toggle('conversation',chat);$('jump').hidden=true;$('nav').setAttribute('aria-expanded','false');document.body.classList.toggle('survey',['background','notice','survey','done'].includes(stage));const screen=$('screen');
+ if(stage==='background'){screen.innerHTML=sheet('请仔细阅读以下情境。',material.background[idx].map(t=>'<p>'+t+'</p>').join(''),'下一步');timer(20,'下一步')}
+ if(stage==='notice'){screen.innerHTML=sheet('接下来，你将阅读一段历史对话。','<p>请查看你与这个AI之前一起处理部门事务的聊天记录。</p>','确定');$('next').onclick=()=>change('next')}
+ if(stage==='history'){screen.innerHTML='<div class="date">2026年11月19日</div>'+material.history.replaceAll('<small>AI · ', '<small>'+identity+' · ')+'<button class="wide" id="next"></button>';timer(120,'我已阅读全部对话记录')}
+ if(stage==='chat'){const n=answers.length;let body='';
+ for(let i=0;i<=n;i++){body+='<section class="task" id="task'+i+'"><h2>任务卡 '+(i+1)+'</h2>'+material.tasks[i]+'</section>';if(!i)body+='<article class="ai"><small>'+identity+'</small><div class="body">'+material.opening+'</div></article>';if(i<n)body+='<article class="user" id="message'+i+'"><small>我</small><div class="body">'+escapeText(answers[i])+'</div></article><article id="reply'+i+'" class="ai" style="scroll-margin-top:130px"><small>'+identity+'</small><div class="body">'+material.replies[i]+'</div></article>'}
+ const hint='请在此处输入发送给AI的第'+(n+1)+'条消息。';screen.innerHTML=body+'<form class="compose"><textarea id="answer" aria-label="'+hint+'" placeholder="'+hint+'" required></textarea><button class="send" id="send" aria-label="发送" disabled><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5m-7 7 7-7 7 7"/></svg></button></form>';
+ const box=$('answer'),draft=key+token+'-draft'+n;box.value=sessionStorage.getItem(draft)||'';function update(){$('send').disabled=!box.value.trim();sessionStorage.setItem(draft,box.value)}update();box.oninput=()=>{update();box.style.height='auto';box.style.height=Math.min(180,box.scrollHeight)+'px'};
+ screen.querySelector('form').onsubmit=async e=>{e.preventDefault();if(busy||!box.value.trim())return;const value=box.value;box.readOnly=true;$('send').disabled=true;await change('answer',{round:n+1,answer:value},box.getBoundingClientRect().top);if(box.isConnected){box.readOnly=false;update()}else sessionStorage.removeItem(draft)};
+ if(newReply&&n){const message=$('message'+(n-1));const gap=anchorTop-message.getBoundingClientRect().top-window.scrollY;if(gap>0)message.style.marginTop=(24+gap)+"px";const adjust=()=>window.scrollBy(0,message.getBoundingClientRect().top-anchorTop);adjust();requestAnimationFrame(adjust);return}}
+ if(stage==='survey')showQuestionnaire(screen);
+ if(stage==='done'){screen.innerHTML='<section class="thanks"><h1>谢谢参与</h1>'+(preview?'<button id="again" class="wide">重新预览</button>':'')+'</section>';if(preview)$('again').onclick=()=>{sessionStorage.removeItem('ai-collaboration-yx-consent-v2');location.reload()}}
+ window.scrollTo(0,0)
+}
+function newToken(){return Array.from(crypto.getRandomValues(new Uint8Array(24)),b=>b.toString(16).padStart(2,'0')).join('')}
+async function startExperiment(screening){try{
+ if(preview){
+  token=newToken();
+  state={group:1+crypto.getRandomValues(new Uint8Array(1))[0]%8,stage:'background',answers:[]};
+ }else{
+  token=localStorage.getItem(key+'-id');
+  if(!token){token=newToken();localStorage.setItem(key+'-id',token)}
+  state=await api('start',{screening});
+ }render()}catch(e){$('screen').textContent='页面未能载入，请允许浏览器保存数据，并检查连接后刷新重试。'}}
+(function mountConsent(){
+ const host=document.getElementById('consent-host');
+ const root=host.attachShadow({mode:'open'});
+ root.innerHTML="<style>\n:host {\n  color-scheme: light;\n  --blue: #1677ce;\n  font: 16px/1.7 \"PingFang SC\",\"Microsoft YaHei\",Arial,sans-serif;\n  color: #272b30;\n  background: #f3f5f7;\n}\n* { box-sizing: border-box }\nbody { margin: 0 }\nmain {\n  max-width: 880px;\n  margin: 26px auto;\n  padding: 32px clamp(24px,5vw,68px) 42px;\n  background: white;\n  border-top: 4px solid var(--blue);\n  box-shadow: 0 2px 14px #26384b0b;\n}\nh1 { margin: 0 0 22px; color: var(--blue); text-align: center; font-size: 28px; line-height: 1.5 }\n.intro { padding-bottom: 21px; border-bottom: 1px solid #e2e5e9 }\np { margin: 0 }\np + p { margin-top: 8px }\nfieldset { border: 0; margin: 23px 0 0; padding: 0; min-width: 0 }\nlegend { padding: 0; font-weight: 650; line-height: 1.6 }\n.star { color: #d84646; margin-right: 5px }\n.num { margin-right: 6px }\n.hint { color: #646b72; font-size: 14px; margin: 5px 0 }\n.choices { display: grid; margin-top: 5px }\nlabel { display: flex; align-items: center; gap: 10px; padding: 6px 12px; min-height: 36px; cursor: pointer }\ninput { width: 18px; height: 18px; margin: 0; accent-color: var(--blue); flex: none }\nlabel:has(:checked) { background: #eef7ff; color: #105fa7 }\nlabel:has(:focus-visible),button:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px }\n@media (hover: hover) { label:hover { background: #f4f8fb } }\n.actions { text-align: center; padding-top: 24px; margin-top: 20px; border-top: 1px solid #e2e5e9 }\n.progress { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 12px; color: #646b72; font-size: 14px }\nprogress { height: 5px; width: 76px; border: 0; border-radius: 5px; background: #e5ebf1; overflow: hidden }\nprogress::-webkit-progress-bar { background: #e5ebf1 }\nprogress::-webkit-progress-value { background: var(--blue) }\nprogress::-moz-progress-bar { background: var(--blue) }\nbutton { border: 0; border-radius: 4px; font: inherit; font-weight: 600; background: var(--blue); color: white; min-height: 44px; min-width: 150px; cursor: pointer }\nbutton:disabled { background: #dee5ec; color: #536171; cursor: default }\n.result { border-top: 1px solid #e2e5e9; padding: 24px 0 }\nh2 { font-size: 19px; margin: 0 0 8px }\n[hidden] { display: none !important }\n@media (max-width: 640px) {\n  :host { background: white }\n  main { margin: 0; padding: 22px 18px max(28px,env(safe-area-inset-bottom)); box-shadow: none; min-height: 100vh }\n  h1 { font-size: 24px; margin-bottom: 18px }\n  .choices { margin-top: 10px; border: 1px solid #dce1e6; border-radius: 4px; overflow: hidden }\n  label { min-height: 46px }\n  label + label { border-top: 1px solid #e4e8ec }\n  button { width: 100%; min-height: 46px }\n}\n\n:host{display:block;background:white;color:#333;font-family:\"Helvetica Neue\",Arial,\"PingFang SC\",sans-serif}\nmain{max-width:800px;background:white;border:0;box-shadow:none;margin:0 auto;padding:35px 20px 64px}\nh1{color:#0095ff;line-height:30px;font-size:22px;font-weight:600;letter-spacing:0;margin:0 0 23px}\n</style><main>\n<h1 id=\"title\">AI使用体验调研</h1>\n<form class=\"card\" id=\"form\" autocomplete=\"off\">\n<div class=\"intro\"><p>欢迎参加本研究。你将进入一个模拟的工作场景，指导AI让它规划一次部门聚餐。你需要用自己的话向 AI 发送三条消息，随后回答关于这次互动的问题。</p><p>参与完全自愿，你可以在提交前退出。研究将记录你发送的文字、问卷答案和页面作答时间，用于研究分析。</p></div>\n<fieldset><legend><span class=\"star\" aria-hidden=\"true\">*</span><span class=\"num\">1.</span>我已阅读以上说明，并自愿参加本研究。</legend><div class=\"choices\"><label><input type=\"radio\" name=\"consent\" value=\"yes\" required>同意参加</label><label><input type=\"radio\" name=\"consent\" value=\"no\">不同意参加</label></div></fieldset>\n<fieldset><legend><span class=\"star\" aria-hidden=\"true\">*</span><span class=\"num\">2.</span>你是否已年满 18 周岁？</legend><div class=\"choices\"><label><input type=\"radio\" name=\"adult\" value=\"yes\" required>是</label><label><input type=\"radio\" name=\"adult\" value=\"no\">否</label></div></fieldset>\n<fieldset aria-describedby=\"example\"><legend><span class=\"star\" aria-hidden=\"true\">*</span><span class=\"num\">3.</span>过去一个月，你是否使用过生成式 AI？</legend><p class=\"hint\" id=\"example\">例如向 AI 提问、让它生成内容或协助你完成任务。</p><div class=\"choices\"><label><input type=\"radio\" name=\"ai\" value=\"yes\" required>是</label><label><input type=\"radio\" name=\"ai\" value=\"no\">否</label></div></fieldset>\n<div class=\"actions\"><div class=\"progress\"><span id=\"count\" aria-live=\"polite\">已完成 0 / 3 题</span><progress id=\"meter\" value=\"0\" max=\"3\" aria-label=\"作答进度\"></progress></div><button disabled>下一步</button></div></form>\n<section class=\"card result\" id=\"result\" tabindex=\"-1\" hidden><h2 id=\"heading\"></h2><p id=\"message\"></p></section>\n</main>";
+
+const form=root.querySelector('form');
+const button=form.querySelector('button');
+const key='ai-collaboration-yx-consent-v2';
+const started=Date.now();
+let finished=false;
+function show(record){
+  const {outcome}=record;
+  finished=true;
+  const passed=outcome==='passed';
+  if(passed){host.remove();document.body.classList.remove('consent-page');startExperiment(record);return}
+  form.hidden=true;
+  root.querySelector('#title').textContent='本次问卷已结束';
+  root.querySelector('#heading').textContent='感谢你的时间';
+  root.querySelector('#message').textContent='根据你的选择，本次研究到此结束。你可以关闭此页面。';
+  document.title='本次问卷已结束 · AI使用体验调研';
+  const result=root.querySelector('#result');
+  result.hidden=false;
+  result.focus();
+  window.scrollTo(0,0);
+}
+function end(outcome){
+  const record={outcome,answers:Object.fromEntries(new FormData(form)),elapsedMs:Date.now()-started};
+  try{sessionStorage.setItem(key,JSON.stringify(record))}catch{}
+  show(record);
+}
+function update(){
+  if(finished)return;
+  const answers=[...new FormData(form).values()];
+  button.disabled=answers.length!==3;
+  root.querySelector('#count').textContent='已完成 '+answers.length+' / 3 题';
+  root.querySelector('#meter').value=answers.length;
+}
+form.addEventListener('change',update);
+form.addEventListener('submit',event=>{
+  event.preventDefault();
+  update();
+  if (finished || button.disabled) return;
+  const answers = [...new FormData(form).values()];
+  end(answers.every(answer => answer === 'yes') ? 'passed' : 'ended');
+});
+function restore(){
+  try{
+    const saved=JSON.parse(sessionStorage.getItem(key));
+    if(saved&&['ended','passed'].includes(saved.outcome)){show(saved);return}
+  }catch{}
+  update();
+}
+restore();
+})();
+</script></body></html>
